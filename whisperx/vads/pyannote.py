@@ -12,6 +12,9 @@ from pyannote.audio.pipelines import VoiceActivityDetection
 from pyannote.audio.pipelines.utils import PipelineModel
 from pyannote.core import Annotation, SlidingWindowFeature
 from pyannote.core import Segment
+from omegaconf import DictConfig, ListConfig
+from omegaconf.base import ContainerMetadata, Metadata
+from omegaconf.nodes import AnyNode, BooleanNode, FloatNode, IntegerNode, StringNode
 import typing
 from collections import OrderedDict, defaultdict
 from torch.torch_version import TorchVersion
@@ -43,6 +46,15 @@ def load_vad_model(device, vad_onset=0.500, vad_offset=0.363, use_auth_token=Non
     # Allowlist OmegaConf types required by Pyannote checkpoints in torch>=2.6.
     torch.serialization.add_safe_globals(
         [
+            DictConfig,
+            ListConfig,
+            ContainerMetadata,
+            Metadata,
+            AnyNode,
+            BooleanNode,
+            FloatNode,
+            IntegerNode,
+            StringNode,
             typing.Any,
             list,
             dict,
